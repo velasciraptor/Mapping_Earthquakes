@@ -21,8 +21,14 @@ let map = L.map('mapid', {
   zoom: 3,
   layers: [streets]});
 
+
+// Create the earthquake layer for our map.
+let earthquakes = new L.layerGroup();
+// We define an object that contains the overlays. This overlay will be visible all the time.
+let overlays = {
+    Earthquakes: earthquakes};
 // Pass our map layers into our layers control and add the layers control to the map.
-L.control.layers(baseMaps).addTo(map);
+L.control.layers(baseMaps, overlays).addTo(map);
 
 // Grabbing our GeoJSON data.
 // Retrieve the earthquake GeoJSON data.
@@ -39,14 +45,14 @@ L.geoJSON(data, {
     // We create a popup for each circleMarker to display the magnitude and
     //  location of the earthquake after the marker has been created and styled.
     onEachFeature: function(feature, layer) {
-    layer.bindPopup("Magnitude: " + feature.properties.mag + "<br>Location: " + feature.properties.place);
-  }
-}).addTo(map);
+    layer.bindPopup("Magnitude: " + feature.properties.mag + "<br>Location: " + feature.properties.place);}
+}).addTo(earthquakes);
+    // Then we add the earthquake layer to our map.
+    earthquakes.addTo(map);
 });
 
-// This function returns the style data for each of the earthquakes we plot on
-// the map. We pass the magnitude of the earthquake into two separate functions
-// to calculate the color and radius.
+// This function returns the style data for each of the earthquakes we plot on the map. 
+// We pass the magnitude of the earthquake into two separate functions to calculate the color and radius.
 function styleInfo(feature) {
     return {
       opacity: 1,
