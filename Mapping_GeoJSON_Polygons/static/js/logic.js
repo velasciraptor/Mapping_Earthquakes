@@ -13,7 +13,7 @@ attribution: 'Map data &copy; <a href="https://www.openstreetmap.org/">OpenStree
 // Create a base layer that holds both maps.
 let baseMaps = {
   Streets: streets,
-  Satellite Streets: satelliteStreets};
+  Satellite_Streets: satelliteStreets};
 
 // Create the map object with center, zoom level and default layer.
 let map = L.map('mapid', {
@@ -26,7 +26,7 @@ L.control.layers(baseMaps).addTo(map);
 
 // Create a style for the lines.
 let myStyle = {
-  color: "#ffffa1",
+  color: "blue",
   weight: 2}
 
 // Accessing the airport GeoJSON URL
